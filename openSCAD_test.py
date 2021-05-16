@@ -12,7 +12,7 @@ def wire(point1=[0, 0, 0], point2=[-10, -10, -10]):
     rot_y = np.rad2deg(np.arccos(diff[2] / length))
     rot_z = np.rad2deg(np.arctan2(diff[1], diff[0]))
     print(length, rot_y, rot_z)
-    obj = cylinder(h=length, r=0.5, segments=50);
+    obj = cylinder(h=length, r=0.25, segments=25);
     obj = rotate([0, rot_y, rot_z])(obj)
     obj = translate(point1)(obj)
     return obj
@@ -23,7 +23,7 @@ def block(nodes, edges):
     for edge in edges:
         obj += wire(nodes[edge[0]], nodes[edge[1]])
 
-    node_obj = sphere(0.6, segments=50);
+    node_obj = sphere(0.25, segments=25)
     for node in nodes:
         obj += translate(node)(node_obj)
     return obj
@@ -37,23 +37,55 @@ def make_model():
 
     nodes = [
         [0, 0, 0],
-        [10, 0, 0],
+        [0, 0, 0],
+        # [10, 0, 0],
         [10, 10, 0],
-        [0, 10, 0],
-        [0, 0, 10],
+        # [0, 10, 0],
+        [0, 0, 0],
+        # [0, 0, 10],
+        [0, 0, 0],
+
         [10, 0, 10],
-        [10, 10, 10],
+        # [10, 10, 10],
+        [0, 0, 0],
         [0, 10, 10],
+        [0, 5, 5],
+        [5, 0, 5],
+
+        [5, 5, 0],
+        [10, 5, 5],
+        [5, 10, 5],
+        [5, 5, 10],
+        [2.5, 2.5, 2.5],
+
+        [2.5, 7.5, 7.5],
+        [7.5, 2.5, 7.5],
+        [7.5, 7.5, 2.5],
     ]
     nodes = 0.5 * np.array(nodes)
 
-    edges = []
-    for i in range(len(nodes)):
-        for j in range(i + 1, len(nodes)):
-            edges.append([i, j])
-    # edges = [
-    #     [0, 1],
-    # ]
+    # edges = []
+    # for i in range(len(nodes)):
+    #     for j in range(i + 1, len(nodes)):
+    #         edges.append([i, j])
+    edges = [
+        [0, 14],
+        [8, 14],
+        [9, 14],
+        [10, 14],
+        [7, 15],
+        [8, 15],
+        [12, 15],
+        [13, 15],
+        [5, 16],
+        [9, 16],
+        [11, 16],
+        [13, 16],
+        [2, 17],
+        [10, 17],
+        [11, 17],
+        [12, 17],
+    ]
 
     # obj = wire(nodes[0], nodes[1])
     # # obj += wire(points[1], points[2])
