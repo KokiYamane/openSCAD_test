@@ -128,7 +128,11 @@ def make_model():
 
     # c1_r = rotate([0, 0, 45])(c1)
 
-    return sum(obj_list)
+    base = cube([20.5, 20.5, 0.5])
+    base = translate([-0.25, -0.25, -0.25])(base)
+    top = translate([0, 0, 20])(base)
+
+    return sum(obj_list) + base + top
     # return obj
 
 if __name__ == '__main__':
