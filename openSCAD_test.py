@@ -37,93 +37,51 @@ def make_model():
 
     nodes = [
         [0, 0, 0],
-        [0, 0, 0],
-        # [10, 0, 0],
+        [10, 0, 0],
         [10, 10, 0],
-        # [0, 10, 0],
-        [0, 0, 0],
-        # [0, 0, 10],
-        [0, 0, 0],
+        [0, 10, 0],
+        [0, 0, 10],
 
         [10, 0, 10],
-        # [10, 10, 10],
-        [0, 0, 0],
+        [10, 10, 10],
         [0, 10, 10],
-        [0, 5, 5],
-        [5, 0, 5],
+        # [0, 5, 5],
+        # [5, 0, 5],
 
-        [5, 5, 0],
-        [10, 5, 5],
-        [5, 10, 5],
-        [5, 5, 10],
-        [2.5, 2.5, 2.5],
+        # [5, 5, 0],
+        # [10, 5, 5],
+        # [5, 10, 5],
+        # [5, 5, 10],
+        # [2.5, 2.5, 2.5],
 
-        [2.5, 7.5, 7.5],
-        [7.5, 2.5, 7.5],
-        [7.5, 7.5, 2.5],
+        # [2.5, 7.5, 7.5],
+        # [7.5, 2.5, 7.5],
+        # [7.5, 7.5, 2.5],
     ]
-    nodes = 0.5 * np.array(nodes)
 
     # edges = []
     # for i in range(len(nodes)):
     #     for j in range(i + 1, len(nodes)):
     #         edges.append([i, j])
     edges = [
-        [0, 14],
-        [8, 14],
-        [9, 14],
-        [10, 14],
-        [7, 15],
-        [8, 15],
-        [12, 15],
-        [13, 15],
-        [5, 16],
-        [9, 16],
-        [11, 16],
-        [13, 16],
-        [2, 17],
-        [10, 17],
-        [11, 17],
-        [12, 17],
+        [0, 5],
+        [1, 6],
+        [2, 7],
+        [3, 4],
+        [0, 7],
+        [1, 4],
+        [2, 5],
+        [3, 6]
     ]
-
-    # obj = wire(nodes[0], nodes[1])
-    # # obj += wire(points[1], points[2])
-
-    # for edge in edges:
-    #     obj += wire(nodes[edge[0]], nodes[edge[1]])
-
-
-    # node_obj = sphere(2);
-    # for node in nodes:
-    #     obj += translate(node)(node_obj)
-
-    obj = block(nodes, edges)
-
-    # c1 = polyhedron(
-    #     points=[
-    #         [10,10,0],
-    #         [10,-10,0],
-    #         [-10,-10,0],
-    #         [-10,10,0],
-    #         [0,0,10]
-    #     ],
-    #     faces=[
-    #         [0,1,4],
-    #         [1,2,4],
-    #         [2,3,4],
-    #         [3,0,4],
-    #         [1,0,3],
-    #         [2,1,3],
-    #     ],
-    # )
 
     obj_list = []
     num = 4
+    nodes = np.array(nodes) / num * 2
+    obj = block(nodes, edges)
     for x in range(num):
         for y in range(num):
             for z in range(num):
-                pos = 5 * np.array([x, y, z])
+                pos = 20 / num * np.array([x, y, z])
                 obj_list.append(translate(pos)(obj))
 
     # c1_r = rotate([0, 0, 45])(c1)
@@ -132,7 +90,7 @@ def make_model():
     base = translate([-0.25, -0.25, -0.25])(base)
     top = translate([0, 0, 20])(base)
 
-    return sum(obj_list) + base + top
+    return sum(obj_list) + base
     # return obj
 
 if __name__ == '__main__':
